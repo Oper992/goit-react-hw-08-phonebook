@@ -1,6 +1,19 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
 import * as api from 'api/contactsApi';
 
+export const register = createAsyncThunk(
+  'contacts/registerUser',
+  async user => {
+    try {
+      const response = await api.signupUser(user);
+
+      console.log(response);
+    } catch (error) {
+      console.log(error);
+    }
+  }
+);
+
 export const postContact = createAsyncThunk(
   'contacts/postContact',
   async contact => {

@@ -7,7 +7,9 @@ import { BallTriangle } from 'react-loader-spinner';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getContacts } from 'redux/operations.js';
-// import { contacts } from 'redux/contacts';
+import RegisterForm from './RegisterForm/RegisterForm';
+import { Routes, Route } from 'react-router-dom';
+import { Header } from './Header/Header';
 
 export function App() {
   const isLoading = useSelector(state => state.phonebook.isLoading);
@@ -28,7 +30,9 @@ export function App() {
 
   return (
     <>
-      <h1 className={style.title}>Phonebook</h1>
+      <Header />
+      <RegisterForm />
+
       <ContactForm />
       <div className={style.filteredContacts}>
         <h2 className={style.contactsTitle}>Contacts</h2>

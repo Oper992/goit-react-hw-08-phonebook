@@ -1,5 +1,10 @@
 const axios = require('axios').default;
-axios.defaults.baseURL = 'https://62d2a4b681cb1ecafa635d08.mockapi.io';
+axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
+
+export const signupUser = async user => {
+  const response = await axios.post(`/users/signup`, user);
+  console.log(response);
+};
 
 export const postContact = async (name, phone) => {
   await axios.post(`/contacts`, {
