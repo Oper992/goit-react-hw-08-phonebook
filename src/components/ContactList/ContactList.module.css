@@ -1,0 +1,16 @@
+.buttonDelete {
+  /* margin-left: auto; */
+}
+
+.buttonDelete:focus {
+  background-color: red;
+}
+
+.contact {
+  display: flex;
+  justify-content: space-between;
+  list-style-type: none;
+}
+.list {
+  padding: 0;
+}
