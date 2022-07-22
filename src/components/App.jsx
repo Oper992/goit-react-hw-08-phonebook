@@ -1,19 +1,12 @@
-import ContactList from './ContactList/ContactList';
-import ContactForm from './ContactForm/ContactForm';
-import Filter from './Filter/Filter';
-import style from './App.module.css';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import { BallTriangle } from 'react-loader-spinner';
 import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getContacts } from 'redux/operations.js';
 import RegisterForm from './RegisterForm/RegisterForm';
 import { Routes, Route } from 'react-router-dom';
 import { Header } from './Header/Header';
+import { Contacts } from 'Pages/Contacts';
 
 export function App() {
-  const isLoading = useSelector(state => state.phonebook.isLoading);
-  const contacts = useSelector(state => state.phonebook.contacts);
   const post = useSelector(state => state.phonebook.post);
   const isDelete = useSelector(state => state.phonebook.delete);
   const dispatch = useDispatch();
@@ -30,19 +23,17 @@ export function App() {
 
   return (
     <>
-      <Header />
-      <RegisterForm />
-
-      <ContactForm />
-      <div className={style.filteredContacts}>
-        <h2 className={style.contactsTitle}>Contacts</h2>
-        <Filter />
-        {isLoading && contacts.length === 0 ? (
-          <BallTriangle color="#00BFFF" height={80} width={80} />
-        ) : (
-          <ContactList />
-        )}
-      </div>
+      <Routes>
+        <Route path="/" element={<Header />}>
+          <Route index element="" />
+          <Route path="signup" element={<RegisterForm />} />
+          <Route path="contacts" element={<Contacts />} />
+          <Route
+            path="*"
+            element={<p>Ты что ебанутый что ты тут делаешь??</p>}
+          />
+        </Route>
+      </Routes>
     </>
   );
 }

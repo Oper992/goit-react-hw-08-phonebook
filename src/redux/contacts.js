@@ -1,5 +1,10 @@
 import { createSlice } from '@reduxjs/toolkit';
-import { postContact, getContacts, deleteContact } from './operations';
+import {
+  postContact,
+  getContacts,
+  deleteContact,
+  register,
+} from './operations';
 
 const slice = createSlice({
   name: 'phonebook',
@@ -10,6 +15,8 @@ const slice = createSlice({
     post: false,
     delete: false,
     filter: '',
+    token: '',
+    isLoggedIn: false,
   },
   reducers: {
     addFilter(state, action) {
@@ -50,6 +57,9 @@ const slice = createSlice({
     },
     [deleteContact.rejected](state, { error }) {
       return { ...state, error: error, isLoading: false };
+    },
+    [register.fulfilled](state, { payload }) {
+      return { ...state, token: payload };
     },
   },
 });

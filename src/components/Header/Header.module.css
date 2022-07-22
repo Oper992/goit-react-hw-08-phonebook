@@ -1,6 +1,25 @@
 .header {
+  display: flex;
   background-color: #3b5998;
+  align-items: center;
   color: white;
   margin: 0;
-  padding: 20px 0 20px 10px;
+  padding: 20px 10px;
 }
+
+.signUp {
+  margin-left: auto;
+  color: white;
+  text-decoration: none;
+}
+.signIn {
+  margin-left: 10px;
+  color: white;
+  text-decoration: none;
+}
+.contacts {
+  margin-left: auto;
+  color: white;
+  text-decoration: none;
+}
+

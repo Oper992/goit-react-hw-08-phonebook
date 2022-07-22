@@ -6,8 +6,8 @@ export const register = createAsyncThunk(
   async user => {
     try {
       const response = await api.signupUser(user);
-
       console.log(response);
+      return response.data.token;
     } catch (error) {
       console.log(error);
     }

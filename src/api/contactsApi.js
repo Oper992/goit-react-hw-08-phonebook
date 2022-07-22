@@ -3,7 +3,7 @@ axios.defaults.baseURL = 'https://connections-api.herokuapp.com';
 
 export const signupUser = async user => {
   const response = await axios.post(`/users/signup`, user);
-  console.log(response);
+  return response;
 };
 
 export const postContact = async (name, phone) => {
