@@ -1,5 +1,6 @@
 import style from './Filter.module.css';
-import { addFilter } from 'redux/contacts';
+import Form from 'react-bootstrap/Form';
+import { addFilter } from 'redux/slice';
 import { useSelector, useDispatch } from 'react-redux';
 
 export default function Filter() {
@@ -12,9 +13,10 @@ export default function Filter() {
   };
 
   return (
-    <>
-      <p className={style.filter}>Find contacts by name</p>
-      <input type="filter" value={filter} onChange={addToFilter} />
-    </>
+    <div className={style.filter}>
+      <p>Find contacts by name</p>
+
+      <Form.Control type="filter" value={filter} onChange={addToFilter} />
+    </div>
   );
 }

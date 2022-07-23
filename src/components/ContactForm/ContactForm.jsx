@@ -1,4 +1,6 @@
 import { useState } from 'react';
+import Button from 'react-bootstrap/Button';
+import Form from 'react-bootstrap/Form';
 import style from './ContactForm.module.css';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
@@ -63,38 +65,49 @@ export default function ContactForm() {
       dispatch(
         postContact({
           name: contactName,
-          phone: contactNumber,
+          number: contactNumber,
         })
       );
+      // console.log(contactNumber)
     }
   };
 
   return (
-    <form onSubmit={handleSubmit} className={style.form}>
-      <input
-        type="text"
-        name="name"
-        value={name}
-        pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
-        title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
-        required
-        onChange={handleChange}
-      />
-      <input
-        type="tel"
-        name="number"
-        value={number}
-        pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
-        title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
-        required
-        onChange={handleChange}
-      />
+    <Form className={style.form} onSubmit={handleSubmit}>
+      <Form.Group className="mb-3" controlId="formBasicName">
+        <Form.Label>Name</Form.Label>
+        <Form.Control
+          type="text"
+          placeholder="паляниця..."
+          pattern="^[a-zA-Zа-яА-Я]+(([' -][a-zA-Zа-яА-Я ])?[a-zA-Zа-яА-Я]*)*$"
+          title="Name may contain only letters, apostrophe, dash and spaces. For example Adrian, Jacob Mercer, Charles de Batz de Castelmore d'Artagnan"
+          required
+          name="name"
+          value={name}
+          onChange={handleChange}
+        />
+      </Form.Group>
+      <Form.Group className="mb-3" controlId="formBasicPassword">
+        <Form.Label>Number</Form.Label>
+        <Form.Control
+          type="tel"
+          placeholder="+38(0..."
+          pattern="\+?\d{1,4}?[-.\s]?\(?\d{1,3}?\)?[-.\s]?\d{1,4}[-.\s]?\d{1,4}[-.\s]?\d{1,9}"
+          title="Phone number must be digits and can contain spaces, dashes, parentheses and can start with +"
+          required
+          name="number"
+          value={number}
+          onChange={handleChange}
+        />
+      </Form.Group>
       {isLoading && post === 'pending' ? (
         <BallTriangle color="#00BFFF" height={30} width={30} />
       ) : (
-        <button type="submit">Add contact</button>
+        <Button variant="primary" type="submit">
+          Add contact
+        </Button>
       )}
       <ToastContainer />
-    </form>
+    </Form>
   );
 }

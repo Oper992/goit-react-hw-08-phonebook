@@ -3,7 +3,9 @@ import {
   postContact,
   getContacts,
   deleteContact,
-  register,
+  login,
+  logOut,
+  getCurrentUser,
 } from './operations';
 
 const slice = createSlice({
@@ -15,8 +17,9 @@ const slice = createSlice({
     post: false,
     delete: false,
     filter: '',
-    token: '',
+    token: null,
     isLoggedIn: false,
+    user: null,
   },
   reducers: {
     addFilter(state, action) {
@@ -58,8 +61,16 @@ const slice = createSlice({
     [deleteContact.rejected](state, { error }) {
       return { ...state, error: error, isLoading: false };
     },
-    [register.fulfilled](state, { payload }) {
-      return { ...state, token: payload };
+    [login.fulfilled](state, { payload }) {
+      return { ...state, token: payload, isLoggedIn: true };
+    },
+    [logOut.fulfilled](state) {
+      state.isLoggedIn = false;
+      state.token = null;
+    },
+    [getCurrentUser.fulfilled](state, { payload }) {
+      state.user = payload;
+      state.isLoggedIn = true;
     },
   },
 });

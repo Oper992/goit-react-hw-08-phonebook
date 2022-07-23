@@ -1,6 +1,5 @@
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
-import 'bootstrap/dist/css/bootstrap.min.css';
 import style from './RegisterForm.module.css';
 import { useState } from 'react';
 import * as operations from 'redux/operations';
@@ -75,7 +74,7 @@ export default function RegisterForm() {
         />
       </Form.Group>
       <Button variant="primary" type="submit">
-        Submit
+        Sign Up
       </Button>
     </Form>
   );

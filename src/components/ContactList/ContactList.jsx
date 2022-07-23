@@ -11,9 +11,12 @@ export default function ContactList() {
   const dispatch = useDispatch();
 
   const filteredContacts = () => {
-    return contacts.filter(({ name }) =>
+    const filteredContacts = contacts.filter(({ name }) =>
       name.toLowerCase().includes(filter.toLowerCase())
     );
+
+    console.log(contacts);
+    return filteredContacts;
   };
 
   const deleteContacts = e => {
@@ -25,9 +28,9 @@ export default function ContactList() {
     <>
       {filteredContacts().length ? (
         <ul className={style.list}>
-          {filteredContacts().map(({ name, id, phone }) => (
+          {filteredContacts().map(({ name, id, number }) => (
             <li key={id} className={style.contact}>
-              {name}: {phone}
+              {name}: {number}
               <button
                 type="button"
                 value={id}
