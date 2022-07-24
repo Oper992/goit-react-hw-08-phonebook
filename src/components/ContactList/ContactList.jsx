@@ -15,7 +15,7 @@ export default function ContactList() {
       name.toLowerCase().includes(filter.toLowerCase())
     );
 
-    console.log(contacts);
+    // console.log(contacts);
     return filteredContacts;
   };
 

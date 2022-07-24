@@ -6,6 +6,7 @@ import {
   login,
   logOut,
   getCurrentUser,
+  logup,
 } from './operations';
 
 const slice = createSlice({
@@ -62,7 +63,14 @@ const slice = createSlice({
       return { ...state, error: error, isLoading: false };
     },
     [login.fulfilled](state, { payload }) {
-      return { ...state, token: payload, isLoggedIn: true };
+      state.token = payload.token;
+      state.user = payload.user;
+      state.isLoggedIn = true;
+    },
+    [logup.fulfilled](state, { payload }) {
+      state.token = payload.token;
+      state.user = payload.user;
+      state.isLoggedIn = true;
     },
     [logOut.fulfilled](state) {
       state.isLoggedIn = false;

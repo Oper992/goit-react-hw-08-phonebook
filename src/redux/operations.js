@@ -5,7 +5,7 @@ export const getCurrentUser = createAsyncThunk(
   'contacts/currentUser',
   async (_, thunkAPI) => {
     const persistToken = thunkAPI.getState().phonebook.token;
-    console.log(persistToken);
+    // console.log(persistToken);
 
     if (persistToken === null) {
       return thunkAPI.rejectWithValue();
@@ -14,7 +14,7 @@ export const getCurrentUser = createAsyncThunk(
     api.token.set(persistToken);
     try {
       const response = await api.getCurrentUser();
-      console.log(response);
+      // console.log(response);
       return response.data;
     } catch (error) {
       console.log(error);
@@ -25,7 +25,7 @@ export const getCurrentUser = createAsyncThunk(
 export const logOut = createAsyncThunk('contacts/logOutUser', async () => {
   try {
     const response = await api.logOutUser();
-    console.log(response);
+    // console.log(response);
     api.token.unset();
   } catch (error) {
     console.log(error);
@@ -37,19 +37,20 @@ export const login = createAsyncThunk('contacts/loginUser', async user => {
     const response = await api.signinUser(user);
     console.log(response);
     api.token.set(response.data.token);
-    return response.data.token;
+    return response.data;
   } catch (error) {
     console.log(error);
   }
 });
 
-export const register = createAsyncThunk(
+export const logup = createAsyncThunk(
   'contacts/registerUser',
   async user => {
     try {
       const response = await api.signupUser(user);
-      console.log(response);
+      // console.log(response);
       api.token.set(response.data.token);
+      return response.data;
     } catch (error) {
       console.log(error);
     }
@@ -69,20 +70,26 @@ export const postContact = createAsyncThunk(
 );
 
 export const getContacts = createAsyncThunk('contacts/getContact', async () => {
-  const response = await api.getContact();
+  try {
+    const response = await api.getContact();
 
-  const editArrayContacts = response.data.map(({ id, name, number }) => {
-    return { id, name, number };
-  });
-  // console.log(editArrayContacts);
-  return editArrayContacts;
+    const editArrayContacts = response.data.map(({ id, name, number }) => {
+      return { id, name, number };
+    });
+    // console.log(editArrayContacts);
+    return editArrayContacts;
+  } catch (error) {
+    console.log(error);
+  }
 });
 
 export const deleteContact = createAsyncThunk(
   'contacts/deleteContact',
   async id => {
-    await api.deleteContact(id);
-
-    // console.log(editArrayContacts);
+    try {
+      await api.deleteContact(id);
+    } catch (error) {
+      console.log(error);
+    }
   }
 );

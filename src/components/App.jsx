@@ -2,11 +2,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { useEffect } from 'react';
 import { getCurrentUser, getContacts } from 'redux/operations.js';
 import RegisterForm from '../Pages/RegisterForm/RegisterForm';
+
 import { Routes, Route } from 'react-router-dom';
 import { Header } from './Header/Header';
 import { Contacts } from '../Pages/Contacts/Contacts';
 import { SignIn } from '../Pages/SignIn/SignIn';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import PrivateRoute from './PrivateRoute/PrivateRoute';
 
 export function App() {
   const post = useSelector(state => state.phonebook.post);
@@ -31,7 +33,14 @@ export function App() {
           <Route index element="" />
           <Route path="signup" element={<RegisterForm />} />
           <Route path="signin" element={<SignIn />} />
-          <Route path="contacts" element={<Contacts />} />
+          <Route
+            path="contacts"
+            element={
+              <PrivateRoute>
+                <Contacts />
+              </PrivateRoute>
+            }
+          />
           <Route
             path="*"
             element={<p>Ты что ебанутый что ты тут делаешь??</p>}

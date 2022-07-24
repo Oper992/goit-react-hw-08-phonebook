@@ -27,7 +27,7 @@ export default function RegisterForm() {
   const onSubmit = async e => {
     e.preventDefault();
     // console.log(e.target.name.value);
-    dispatch(operations.register({ name, email, password }));
+    dispatch(operations.logup({ name, email, password }));
 
     reset();
   };
