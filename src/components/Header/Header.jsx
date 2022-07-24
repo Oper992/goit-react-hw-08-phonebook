@@ -1,11 +1,11 @@
 import { Link, Outlet } from 'react-router-dom';
 import style from './Header.module.css';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { UserMenu } from 'components/UserMenu/UserMenu';
 
 export const Header = () => {
   const isLoggedIn = useSelector(state => state.phonebook.isLoggedIn);
-  const dispatch = useDispatch();
+  // const dispatch = useDispatch();
 
   return (
     <>

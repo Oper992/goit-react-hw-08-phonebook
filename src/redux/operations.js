@@ -24,7 +24,7 @@ export const getCurrentUser = createAsyncThunk(
 
 export const logOut = createAsyncThunk('contacts/logOutUser', async () => {
   try {
-    const response = await api.logOutUser();
+    await api.logOutUser();
     // console.log(response);
     api.token.unset();
   } catch (error) {
@@ -43,19 +43,16 @@ export const login = createAsyncThunk('contacts/loginUser', async user => {
   }
 });
 
-export const logup = createAsyncThunk(
-  'contacts/registerUser',
-  async user => {
-    try {
-      const response = await api.signupUser(user);
-      // console.log(response);
-      api.token.set(response.data.token);
-      return response.data;
-    } catch (error) {
-      console.log(error);
-    }
+export const logup = createAsyncThunk('contacts/registerUser', async user => {
+  try {
+    const response = await api.signupUser(user);
+    // console.log(response);
+    api.token.set(response.data.token);
+    return response.data;
+  } catch (error) {
+    console.log(error);
   }
-);
+});
 
 export const postContact = createAsyncThunk(
   'contacts/postContact',
