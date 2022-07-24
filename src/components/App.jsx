@@ -56,10 +56,7 @@ export function App() {
               </PrivateRoute>
             }
           />
-          <Route
-            path="*"
-            element={<p>Ты что ебанутый что ты тут делаешь??</p>}
-          />
+          <Route path="*" element={<p>Что то пошло не так</p>} />
         </Route>
       </Routes>
     </>
