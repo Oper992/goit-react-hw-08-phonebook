@@ -12,10 +12,16 @@
   color: white;
   text-decoration: none;
 }
+
 .signIn {
   margin-left: 10px;
   color: white;
   text-decoration: none;
+}
+.signIn:hover,
+.signUp:hover,
+.title:hover {
+  color: white;
 }
 .contacts {
   margin-left: auto;
@@ -23,3 +29,8 @@
   text-decoration: none;
 }
 
+.title {
+  text-decoration: none;
+  font-size: 40px;
+  color: white;
+}

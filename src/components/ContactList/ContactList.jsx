@@ -4,6 +4,7 @@ import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { deleteContact } from 'redux/operations.js';
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
+import Button from 'react-bootstrap/Button';
 
 export default function ContactList() {
   const contacts = useSelector(state => state.phonebook.contacts);
@@ -31,14 +32,15 @@ export default function ContactList() {
           {filteredContacts().map(({ name, id, number }) => (
             <li key={id} className={style.contact}>
               {name}: {number}
-              <button
+              <Button
+                variant="primary"
                 type="button"
                 value={id}
                 onClick={deleteContacts}
                 className={style.buttonDelete}
               >
                 Delete
-              </button>
+              </Button>
             </li>
           ))}
         </ul>

@@ -26,7 +26,9 @@ export const Contacts = () => {
       <div className={style.contactsList}>
         <h2 className={style.contactsTitle}>My contacts</h2>
         {isLoading && contacts.length === 0 ? (
-          <BallTriangle color="#00BFFF" height={80} width={80} />
+          <div className={style.spinner}>
+            <BallTriangle color="#00BFFF" height={80} width={80} />
+          </div>
         ) : (
           <ContactList />
         )}

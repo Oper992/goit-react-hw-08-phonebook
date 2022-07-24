@@ -10,9 +10,8 @@ export const Header = () => {
   return (
     <>
       <div className={style.header}>
-        <h1>Phonebook</h1>
-        <Link to="/contacts" className={style.contacts}>
-          Contacts
+        <Link to="/" className={style.title}>
+          Phonebook
         </Link>
         {isLoggedIn ? (
           <UserMenu />

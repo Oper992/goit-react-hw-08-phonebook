@@ -1,5 +1,5 @@
 .buttonDelete {
-  /* margin-left: auto; */
+  margin-left: 20px;
 }
 
 .buttonDelete:focus {
@@ -10,7 +10,15 @@
   display: flex;
   justify-content: space-between;
   list-style-type: none;
+  align-items: center;
 }
+
+.contact:not(:last-child){
+  margin-bottom: 10px;
+}
+
 .list {
   padding: 0;
+  width: 400px;
+  margin: 0 auto;
 }
