@@ -1,4 +1,5 @@
 import { createAsyncThunk } from '@reduxjs/toolkit';
+import { toast } from 'react-toastify';
 import * as api from 'api/contactsApi';
 
 export const getCurrentUser = createAsyncThunk(
@@ -18,6 +19,7 @@ export const getCurrentUser = createAsyncThunk(
       return response.data;
     } catch (error) {
       console.log(error);
+      return thunkAPI.rejectWithValue();
     }
   }
 );
@@ -32,27 +34,37 @@ export const logOut = createAsyncThunk('contacts/logOutUser', async () => {
   }
 });
 
-export const login = createAsyncThunk('contacts/loginUser', async user => {
-  try {
-    const response = await api.signinUser(user);
-    console.log(response);
-    api.token.set(response.data.token);
-    return response.data;
-  } catch (error) {
-    console.log(error);
+export const login = createAsyncThunk(
+  'contacts/loginUser',
+  async (user, thunkAPI) => {
+    try {
+      const response = await api.signinUser(user);
+      console.log(response);
+      api.token.set(response.data.token);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      toast.error('Name or email is incorrect');
+      return thunkAPI.rejectWithValue();
+    }
   }
-});
+);
 
-export const logup = createAsyncThunk('contacts/registerUser', async user => {
-  try {
-    const response = await api.signupUser(user);
-    // console.log(response);
-    api.token.set(response.data.token);
-    return response.data;
-  } catch (error) {
-    console.log(error);
+export const logup = createAsyncThunk(
+  'contacts/registerUser',
+  async (user, thunkAPI) => {
+    try {
+      const response = await api.signupUser(user);
+      // console.log(response);
+      api.token.set(response.data.token);
+      return response.data;
+    } catch (error) {
+      console.log(error);
+      toast.error('This user has already been registered');
+      return thunkAPI.rejectWithValue();
+    }
   }
-});
+);
 
 export const postContact = createAsyncThunk(
   'contacts/postContact',

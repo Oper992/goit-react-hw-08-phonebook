@@ -21,6 +21,8 @@ const slice = createSlice({
     token: null,
     isLoggedIn: false,
     user: null,
+    refresh: false,
+    login: false,
   },
   reducers: {
     addFilter(state, action) {
@@ -54,31 +56,52 @@ const slice = createSlice({
       return { ...state, error: error, isLoading: false };
     },
     [deleteContact.pending](state) {
-      // return { ...state, isLoading: true };
+      state.delete = true;
     },
     [deleteContact.fulfilled](state) {
-      return { ...state, delete: true };
+      return { ...state, delete: false };
     },
     [deleteContact.rejected](state, { error }) {
       return { ...state, error: error, isLoading: false };
+    },
+    [login.pending](state) {
+      state.login = true;
     },
     [login.fulfilled](state, { payload }) {
       state.token = payload.token;
       state.user = payload.user;
       state.isLoggedIn = true;
+      state.login = false;
+    },
+    [login.rejected](state, { payload }) {
+      state.login = false;
+    },
+    [logup.pending](state) {
+      state.login = true;
     },
     [logup.fulfilled](state, { payload }) {
       state.token = payload.token;
       state.user = payload.user;
       state.isLoggedIn = true;
+      state.login = false;
+    },
+    [logup.rejected](state) {
+      state.login = false;
     },
     [logOut.fulfilled](state) {
       state.isLoggedIn = false;
       state.token = null;
     },
+    [getCurrentUser.pending](state) {
+      state.refresh = true;
+    },
     [getCurrentUser.fulfilled](state, { payload }) {
       state.user = payload;
       state.isLoggedIn = true;
+      state.refresh = false;
+    },
+    [getCurrentUser.rejected](state) {
+      state.refresh = false;
     },
   },
 });

@@ -26,8 +26,14 @@ export const Contacts = () => {
       <div className={style.contactsList}>
         <h2 className={style.contactsTitle}>My contacts</h2>
         {isLoading && contacts.length === 0 ? (
-          <div className={style.spinner}>
-            <BallTriangle color="#00BFFF" height={80} width={80} />
+          <div className="d-flex justify-content-center align-items-center">
+            <div
+              className="spinner-border text-primary m-5"
+              style={{ width: '5rem', height: '5rem' }}
+              role="status"
+            >
+              <span className="visually-hidden">Loading...</span>
+            </div>
           </div>
         ) : (
           <ContactList />

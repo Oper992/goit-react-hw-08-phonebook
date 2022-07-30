@@ -7,14 +7,16 @@ import { Header } from './Header/Header';
 import { Contacts } from '../Pages/Contacts/Contacts';
 import { SignIn } from '../Pages/SignIn/SignIn';
 import 'bootstrap/dist/css/bootstrap.min.css';
+import 'react-toastify/dist/ReactToastify.css';
 import PrivateRoute from './PrivateRoute/PrivateRoute';
 import PublicRoute from './PublicRoute/PublicRoute';
 import { HomePage } from 'Pages/HomePage/HomePage';
+import { ToastContainer } from 'react-toastify';
 
 export function App() {
   const post = useSelector(state => state.phonebook.post);
   const isDelete = useSelector(state => state.phonebook.delete);
-  // const isLoggedIn = useSelector(state => state.phonebook.isLoggedIn);
+
   const dispatch = useDispatch();
 
   useEffect(() => {
@@ -59,6 +61,7 @@ export function App() {
           <Route path="*" element={<p>Что то пошло не так</p>} />
         </Route>
       </Routes>
+      <ToastContainer />
     </>
   );
 }

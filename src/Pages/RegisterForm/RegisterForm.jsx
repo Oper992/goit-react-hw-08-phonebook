@@ -3,12 +3,13 @@ import Form from 'react-bootstrap/Form';
 import style from './RegisterForm.module.css';
 import { useState } from 'react';
 import * as operations from 'redux/operations';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 export default function RegisterForm() {
   const [name, setName] = useState('');
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
+  const login = useSelector(state => state.phonebook.login);
   const dispatch = useDispatch();
 
   const onChange = ({ target: { name, value } }) => {
@@ -28,54 +29,60 @@ export default function RegisterForm() {
     e.preventDefault();
     // console.log(e.target.name.value);
     dispatch(operations.logup({ name, email, password }));
-
-    reset();
-  };
-
-  const reset = () => {
-    setName('');
-    setEmail('');
-    setPassword('');
   };
 
   return (
-    <Form className={style.form} onSubmit={onSubmit}>
-      <Form.Group className="mb-3" controlId="formBasicName">
-        <Form.Label>Name</Form.Label>
-        <Form.Control
-          type="text"
-          placeholder="name"
-          name="name"
-          value={name}
-          onChange={onChange}
-        />
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Label>Email address</Form.Label>
-        <Form.Control
-          type="email"
-          placeholder="Enter email"
-          name="email"
-          value={email}
-          onChange={onChange}
-        />
-        <Form.Text className="text-muted">
-          We'll never share your email with anyone else.
-        </Form.Text>
-      </Form.Group>
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Label>Password</Form.Label>
-        <Form.Control
-          type="password"
-          placeholder="Password"
-          name="password"
-          value={password}
-          onChange={onChange}
-        />
-      </Form.Group>
-      <Button variant="primary" type="submit">
-        Sign Up
-      </Button>
-    </Form>
+    <>
+      {login ? (
+        <div className="d-flex justify-content-center align-items-center">
+          <div
+            className="spinner-border text-primary m-5"
+            style={{ width: '5rem', height: '5rem' }}
+            role="status"
+          >
+            <span className="visually-hidden">Loading...</span>
+          </div>
+        </div>
+      ) : (
+        <Form className={style.form} onSubmit={onSubmit}>
+          <Form.Group className="mb-3" controlId="formBasicName">
+            <Form.Label>Name</Form.Label>
+            <Form.Control
+              type="text"
+              placeholder="name"
+              name="name"
+              value={name}
+              onChange={onChange}
+            />
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Label>Email address</Form.Label>
+            <Form.Control
+              type="email"
+              placeholder="Enter email"
+              name="email"
+              value={email}
+              onChange={onChange}
+            />
+            <Form.Text className="text-muted">
+              We'll never share your email with anyone else.
+            </Form.Text>
+          </Form.Group>
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Label>Password</Form.Label>
+            <Form.Control
+              type="password"
+              placeholder="Password"
+              name="password"
+              value={password}
+              onChange={onChange}
+            />
+          </Form.Group>
+          <Button variant="primary" type="submit">
+            Sign Up
+          </Button>
+        </Form>
+      )}
+    </>
   );
 }

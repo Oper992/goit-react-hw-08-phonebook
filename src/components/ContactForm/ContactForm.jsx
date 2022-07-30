@@ -35,7 +35,7 @@ export default function ContactForm() {
     }
   };
 
-  const handleSubmit = async e => {
+  const handleSubmit = e => {
     e.preventDefault();
 
     addContacts(name, number);
@@ -101,13 +101,19 @@ export default function ContactForm() {
         />
       </Form.Group>
       {isLoading && post === 'pending' ? (
-        <BallTriangle color="#00BFFF" height={30} width={30} />
+        <button className="btn btn-primary" type="button" disabled>
+          <span
+            className="spinner-border spinner-border-sm"
+            role="status"
+            aria-hidden="true"
+          ></span>
+          Loading...
+        </button>
       ) : (
         <Button variant="primary" type="submit">
           Add contact
         </Button>
       )}
-      <ToastContainer />
     </Form>
   );
 }
