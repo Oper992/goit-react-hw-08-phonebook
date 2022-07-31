@@ -1,0 +1,19 @@
+.buttonDelete {
+  margin-left: auto;
+}
+
+.contact {
+  display: flex;
+  justify-content: flex-start;
+  list-style-type: none;
+  align-items: center;
+  font-size: 20px;
+}
+
+.contact:not(:last-child) {
+  margin-bottom: 10px;
+}
+
+.number {
+    margin: 0 auto 0 10px;
+  }

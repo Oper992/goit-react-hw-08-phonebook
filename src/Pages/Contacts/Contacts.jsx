@@ -1,7 +1,5 @@
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffect } from 'react';
-import { BallTriangle } from 'react-loader-spinner';
-import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
 import ContactList from '../../components/ContactList/ContactList';
 import Filter from '../../components/Filter/Filter';
 import style from './Contacts.module.css';
@@ -11,11 +9,22 @@ import { getContacts } from 'redux/operations';
 export const Contacts = () => {
   const isLoading = useSelector(state => state.phonebook.isLoading);
   const contacts = useSelector(state => state.phonebook.contacts);
+  const post = useSelector(state => state.phonebook.post);
+  const isDelete = useSelector(state => state.phonebook.delete);
   const dispatch = useDispatch();
 
   useEffect(() => {
-    dispatch(getContacts());
+    const dispatchContacts = () => {
+      dispatch(getContacts());
+    };
+    dispatchContacts();
   }, [dispatch]);
+
+  useEffect(() => {
+    if (post === true || isDelete === true) {
+      dispatch(getContacts());
+    }
+  }, [dispatch, post, isDelete]);
 
   return (
     <div className={style.contacts}>

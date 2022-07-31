@@ -2,14 +2,12 @@ import { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Form from 'react-bootstrap/Form';
 import style from './ContactForm.module.css';
-import { ToastContainer, toast } from 'react-toastify';
+import { toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
 import { useSelector, useDispatch } from 'react-redux';
 import { postContact } from 'redux/operations';
-// import * as api from '../../api/contactsApi';
+
 import 'react-loader-spinner/dist/loader/css/react-spinner-loader.css';
-import { BallTriangle } from 'react-loader-spinner';
-// import { getContacts } from 'redux/operations.js';
 
 const INITIAL_STATE = {
   name: '',
@@ -19,9 +17,8 @@ const INITIAL_STATE = {
 export default function ContactForm() {
   const [name, setName] = useState('');
   const [number, setNumber] = useState('');
-  const isLoading = useSelector(state => state.phonebook.isLoading);
   const contacts = useSelector(state => state.phonebook.contacts);
-  const post = useSelector(state => state.phonebook.post);
+  const createPost = useSelector(state => state.phonebook.createPost);
   const dispatch = useDispatch();
 
   const handleChange = e => {
@@ -100,7 +97,7 @@ export default function ContactForm() {
           onChange={handleChange}
         />
       </Form.Group>
-      {isLoading && post === 'pending' ? (
+      {createPost ? (
         <button className="btn btn-primary" type="button" disabled>
           <span
             className="spinner-border spinner-border-sm"

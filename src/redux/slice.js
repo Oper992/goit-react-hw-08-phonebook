@@ -23,6 +23,7 @@ const slice = createSlice({
     user: null,
     refresh: false,
     login: false,
+    createPost: false,
   },
   reducers: {
     addFilter(state, action) {
@@ -31,14 +32,16 @@ const slice = createSlice({
   },
   extraReducers: {
     [postContact.pending](state) {
-      state.isLoading = true;
-      state.post = 'pending';
+      // state.isLoading = true;
+      state.createPost = true;
     },
     [postContact.fulfilled](state) {
       state.post = true;
+      state.createPost = false;
+      // state.isLoading = false;
     },
     [postContact.rejected](state, { error }) {
-      return { ...state, error: error, isLoading: false };
+      return { ...state, error: error, isLoading: false, post: false };
     },
     [getContacts.pending](state) {
       state.isLoading = true;
@@ -55,14 +58,12 @@ const slice = createSlice({
     [getContacts.rejected](state, { error }) {
       return { ...state, error: error, isLoading: false };
     },
-    [deleteContact.pending](state) {
-      state.delete = true;
-    },
+    // [deleteContact.pending](state) {},
     [deleteContact.fulfilled](state) {
-      return { ...state, delete: false };
+      return { ...state, delete: true };
     },
     [deleteContact.rejected](state, { error }) {
-      return { ...state, error: error, isLoading: false };
+      return { ...state, error: error };
     },
     [login.pending](state) {
       state.login = true;

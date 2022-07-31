@@ -61,7 +61,7 @@ export function App() {
           <Route path="*" element={<p>Что то пошло не так</p>} />
         </Route>
       </Routes>
-      <ToastContainer />
+      <ToastContainer autoClose={1500} />
     </>
   );
 }
